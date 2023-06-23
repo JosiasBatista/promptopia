@@ -19,7 +19,7 @@ submitting, handleSubmit }) => {
       >
         <label>
           <span className="font-satoshi font-semibold text-base text-gray-700">
-            Your AI Prompt
+            Your AI Prompt *
           </span>
 
           <textarea
@@ -34,7 +34,7 @@ submitting, handleSubmit }) => {
         <label>
           <span className="font-satoshi font-semibold text-base text-gray-700">
             Tag {` `}
-            <span className="font-normal">(#product, #webdevelopment, #ideia)</span>
+            <span className="font-normal">(#product, #webdevelopment, #ideia) *</span>
           </span>
 
           <input
@@ -42,6 +42,20 @@ submitting, handleSubmit }) => {
             onChange={(e) => setPost({...post, tag: e.target.value})}
             placeholder="#tag."
             required
+            className="form_input"
+          />
+        </label>
+
+        <label>
+          <span className="font-satoshi font-semibold text-base text-gray-700">
+            AI Application {` `}
+            <span className="font-normal">(Optional)</span>
+          </span>
+
+          <input
+            value={post.aiService}
+            onChange={(e) => setPost({...post, aiService: e.target.value})}
+            placeholder="chatgpt..."
             className="form_input"
           />
         </label>

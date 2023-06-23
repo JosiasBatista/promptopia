@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 import PromptCard from './PromptCard';
 
@@ -19,6 +20,9 @@ const PromptCardList = ({ data, handleTagClick }) => {
 }
 
 const Feed = () => {
+  const searchParams = useSearchParams();
+  const aiServiceTag = searchParams.get('aiServiceTag');
+
   const [allPosts, setAllPosts] = useState([]);
   const [searchText, setSearchText] = useState("");
   // const [searchTimeout, setSearchTimeout] = useState(null);
@@ -30,6 +34,7 @@ const Feed = () => {
       const data = await response.json();
 
       setAllPosts(data);
+      setSearchText(aiServiceTag || "")
     }
 
     fetchPosts();
@@ -51,7 +56,8 @@ const Feed = () => {
     setSearchedResults(allPosts.filter((post) => (
       regex.test(post.creator.username) ||
       regex.test(post.tag) ||
-      regex.test(post.prompt)
+      regex.test(post.prompt) ||
+      regex.test(post.aiService)
     )))
   }
 
@@ -64,7 +70,7 @@ const Feed = () => {
       <form className="relative w-full flex-center">
         <input
           type="text"
-          placeholder="Search for a tag or a username"
+          placeholder="Search for a tag, a username or AI service"
           value={searchText}
           onChange={handleSearchChange}
           required
@@ -74,7 +80,7 @@ const Feed = () => {
 
       <PromptCardList
         data={searchText.length > 0 ? searchedResults : allPosts}
-        handleTagClick={() => {}}
+        handleTagClick={(tag) => setSearchText(tag)}
       />
     </section>
   )

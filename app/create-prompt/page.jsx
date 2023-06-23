@@ -19,14 +19,18 @@ const CreatePrompt = () => {
     e.preventDefault();
     setSubmitting(true);
 
+    const promptData = {
+      prompt: post.prompt,
+      userId: session?.user.id,
+      tag: post.tag,
+    }
+
+    if (post.aiService) promptData.aiService = post.aiService;
+
     try {
       const response = await fetch('/api/prompt/new', {
         method: 'POST',
-        body: JSON.stringify({
-          prompt: post.prompt,
-          userId: session?.user.id,
-          tag: post.tag
-        })
+        body: JSON.stringify(promptData)
       })
 
       if (response.ok) {

@@ -73,6 +73,13 @@ handleEdit, handleDelete }) => {
       >
         #{post.tag}
       </p>
+      {post.aiService && 
+        <p className="font-inter text-sm orange_gradient cursor-pointer"
+          onClick={() => handleTagClick && handleTagClick(post.aiService)}
+        >
+          #{post.aiService}
+        </p>
+      }
 
       {session?.user.id === post.creator._id &&
       pathName === '/profile' && (

@@ -2,15 +2,19 @@ import { connectDB } from "@utils/database";
 import Prompt from "@models/prompt";
 
 export const POST = async (req, res) => {
-  const { userId, prompt, tag } = await req.json();
+  const { userId, prompt, tag, aiService } = await req.json();
 
   try {
     await connectDB();
-    const newPrompt = new Prompt({ creator: userId,
+    const promptData = {
+      creator: userId,
       tag,
       prompt
-    });
+    }
 
+    if (aiService) promptData.aiService = aiService;
+
+    const newPrompt = new Prompt(promptData);
     await newPrompt.save();
 
     return new Response(JSON.stringify(newPrompt), {
