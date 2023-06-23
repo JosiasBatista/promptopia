@@ -25,12 +25,11 @@ const Feed = () => {
 
   const [allPosts, setAllPosts] = useState([]);
   const [searchText, setSearchText] = useState("");
-  // const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch('/api/prompt');
+      const response = await fetch('/api/prompt', { next: { revalidate: 60 }});
       const data = await response.json();
 
       setAllPosts(data);
