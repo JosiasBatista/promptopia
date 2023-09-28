@@ -17,6 +17,13 @@ const AI_SERVICES = [
     serviceLink: "https://openai.com/blog/chatgpt",
     serviceTag: "chatgpt"
   },
+  {
+    image: "midjourney",
+    title: "Midjourney",
+    description: "Midjourney is a generative artificial intelligence program and service created and hosted by San Francisco-based independent research lab Midjourney, Inc. Midjourney generates images from natural language descriptions, called prompts",
+    serviceLink: "https://www.midjourney.com",
+    serviceTag: "midjourney"
+  },
 ] 
 
 const AiServiceCardList = () => {
